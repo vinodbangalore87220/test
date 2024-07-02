@@ -1,8 +1,6 @@
 package com.example.test;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +21,33 @@ public class TestController {
        List<Employee> employees = getAllEmployeeList();
        return employees;
     }
+    @PostMapping("/employee")
+    public List<Employee> addEmployee(@RequestBody Employee employee){
+        employeeList.add(employee);
+        return employeeList;
+    }
 
+    @PutMapping("/employee/{id}")
+    public List<Employee> updateEmployee(@PathVariable("id") int id, @RequestBody Employee employee) {
+        return findAndUpdate(id, employee);
+    }
     @GetMapping("/{id}")
     public Employee getEmployee(@PathVariable("id") int id){
         Employee emp = findEmployee(id);
         return emp;
+    }
+
+    private List<Employee> findAndUpdate(int id,Employee employee) {
+        for(int i = 0 ; i < employeeList.size() ; i++){
+            Employee em = employeeList.get(i);
+            if(id == em.getId()){
+                em.setName(employee.getName());
+                em.setCity(employee.getCity());
+                em.setDepartment(employee.getDepartment());
+
+            }
+        }
+        return employeeList;
     }
 
     private Employee findEmployee(int id) {
