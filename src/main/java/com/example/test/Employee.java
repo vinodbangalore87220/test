@@ -1,16 +1,17 @@
 package com.example.test;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
     String name;
     String department;
     String city;
 
-    public Employee(int id, String name, String department, String city) {
-        this.id = id;
-        this.name = name;
-        this.department = department;
-        this.city = city;
+    public Employee() {
     }
 
     public int getId() {
