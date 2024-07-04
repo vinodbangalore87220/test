@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -25,6 +24,9 @@ public class EmployeeService {
     }
 
     public Employee add(Employee emp){
+        if(emp.getAge() < 18){
+            throw new RuntimeException("Age = "+emp.getAge() +", employee age is less than 18");
+        }
         return employeeRepository.save(emp);
     }
 
@@ -38,5 +40,12 @@ public class EmployeeService {
 
     public void deleteEmployee(int id){
         employeeRepository.deleteById(id);
+    }
+
+    public List<Employee> findByCity(String city){
+        List<Employee> empList1 =  employeeRepository.findByCities(city);
+       // List<Employee> empList= employeeRepository.findAll();
+      //  List<Employee> empList1 = empList.stream().filter(emp -> emp.getCity().equals(city)).collect(Collectors.toList());
+        return empList1 ;
     }
 }

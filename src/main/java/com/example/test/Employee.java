@@ -11,6 +11,8 @@ public class Employee {
     String department;
     String city;
 
+    int age;
+
     public Employee() {
     }
 
@@ -44,5 +46,13 @@ public class Employee {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

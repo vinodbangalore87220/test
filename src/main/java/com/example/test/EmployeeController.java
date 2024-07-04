@@ -3,7 +3,6 @@ package com.example.test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class EmployeeController {
        return employees;
     }
     @PostMapping("/employee")
-    public Employee addEmployee(@RequestBody Employee employee){
+    public Employee addEmployee(@RequestBody Employee employee) throws EmployeeAgeException {
         Employee emp =  employeeService.add(employee);
         return emp;
     }
@@ -40,9 +39,14 @@ public class EmployeeController {
         return emp;
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable("id") int id){
+    @DeleteMapping("/employee/{city}")
+    public void deleteEmployee(@PathVariable("city") int id){
         employeeService.deleteEmployee(id);
     }
 
+    @GetMapping("/employee")
+    public List<Employee> getEmployeeByCity(@RequestParam("city") String city){
+        List<Employee> empList = employeeService.findByCity(city);
+        return empList;
+    }
 }
