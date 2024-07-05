@@ -12,8 +12,6 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    List<Employee> employeeList = new ArrayList<>();
-
 
     public Employee findAndUpdate(int id, Employee employee) {
         Employee emp = employeeRepository.findById(id).get();
@@ -44,7 +42,7 @@ public class EmployeeService {
 
     public List<Employee> findByCity(String city){
         List<Employee> empList1 =  employeeRepository.findByCities(city);
-       // List<Employee> empList= employeeRepository.findAll();
+      //  List<Employee> empList= employeeRepository.findAll();
       //  List<Employee> empList1 = empList.stream().filter(emp -> emp.getCity().equals(city)).collect(Collectors.toList());
         return empList1 ;
     }
